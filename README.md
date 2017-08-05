@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Before running application
 
-Things you may want to cover:
+1. Bundle Install
 
-* Ruby version
+2. Create DB
+- Run postgres: $ mig
+- rake db:create
+- rake db:migrate
+- rake db:seed
 
-* System dependencies
+3. Start Local Server
+- Run: $ rails s
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+4. Enjoy!
