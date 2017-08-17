@@ -4,13 +4,14 @@ Before running application
 
 1. Bundle Install
 
-2. Create DB
-- Run postgres: $ mig
+2. Start Postgres server $ pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+
+3. Create DB
 - rake db:create
 - rake db:migrate
 - rake db:seed
 
-3. Start Local Server
+4. Start Local Server
 - Run: $ rails s
 
-4. Enjoy!
+5. Enjoy!

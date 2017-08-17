@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
-  # GET /ratings
-  def index
-    @Users = Rating.all
-    render json: @Users
-  end
+  # # GET /users
+  # def index
+  #   @Users = User.all
+  #   render json: @Users
+  # end
 
   # GET /Users/1
   def show
@@ -25,16 +26,24 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /Users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    if current_user.id == params[:id].to_i
+      if @user.update(user_params)
+        render json: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { error: 'User Not Authorized' }, status: :unauthorized
     end
   end
 
   # DELETE /Users/1
   def destroy
-    @user.destroy
+    if current_user.id == params[:id].to_i
+      @user.destroy
+    else
+      render json: { error: 'User Not Authorized' }, status: :unauthorized
+    end
   end
 
   private
@@ -45,6 +54,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:user_id, :bathroom_id, :rating)
+      params.permit(:user_id, :bathroom_id, :rating)
     end
 end
