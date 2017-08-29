@@ -5,8 +5,8 @@
 
 Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
 
-# Allow an IP address to make 5 requests every 1 seconds
-Rack::Attack.throttle('req/ip', :limit => 5, :period => 1.second) do |req|
+# Allow an IP address to make 10 requests every 1 seconds
+Rack::Attack.throttle('req/ip', :limit => 10, :period => 1.second) do |req|
   req.ip
 end
 
